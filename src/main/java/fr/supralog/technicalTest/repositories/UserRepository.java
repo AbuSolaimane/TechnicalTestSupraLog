@@ -6,4 +6,5 @@ import fr.supralog.technicalTest.domain.UserEntity;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
+	UserEntity findByEmail(String username);
 }
