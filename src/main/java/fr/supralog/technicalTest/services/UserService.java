@@ -1,9 +1,10 @@
 package fr.supralog.technicalTest.services;
 
+import fr.supralog.technicalTest.dto.request.UserRequest;
 import fr.supralog.technicalTest.dto.response.UserResponse;
 
-public interface UserSevice {
+public interface UserService {
 	
-	public void createUser();
+	public void createUser(UserRequest userRequest);
 	public UserResponse getUserById(Long userId);
 }
