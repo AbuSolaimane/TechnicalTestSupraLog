@@ -6,6 +6,7 @@ server:
 spring:
   messages:
     basename: messages
+    encoding: UTF-8
   jpa:
     database: postgresql
     show-sql: true
