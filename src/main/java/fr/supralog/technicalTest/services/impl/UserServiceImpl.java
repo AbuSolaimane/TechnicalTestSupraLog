@@ -17,6 +17,11 @@ import fr.supralog.technicalTest.repositories.UserRepository;
 import fr.supralog.technicalTest.services.UserService;
 import jakarta.transaction.Transactional;
 
+/**
+ * Service implementation for managing user-related operations.
+ * Provides methods for creating and retrieving user information.
+ */
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -24,12 +29,25 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	
+	/**
+     * Constructs a new UserServiceImpl with the specified UserRepository and PasswordEncoder.
+     *
+     * @param userRepository The repository for accessing user data.
+     * @param passwordEncoder The password encoder for encrypting user passwords.
+     */
 	public UserServiceImpl(final UserRepository userRepository, final PasswordEncoder passwordEncoder) {
 		super();
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
 	}
 
+	/**
+     * Creates a new user with the provided user information.
+     * Validates the user request and saves the user entity to the database.
+     *
+     * @param userRequest The user information to be used for creating the user.
+     * @throws BusinessRuleException If validation rules are not met.
+     */
 	@Override
 	public void createUser(UserRequest userRequest) {
 		
@@ -40,6 +58,12 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(entity);
 	}
 
+	/**
+     * Validates the user information based on business rules.
+     *
+     * @param userRequest The user information to be validated.
+     * @throws BusinessRuleException If validation rules are not met.
+     */
 	private void validate(UserRequest userRequest) {
 		
 		if (!userRequest.password().equals(userRequest.confirmedPassword()))
@@ -52,6 +76,13 @@ public class UserServiceImpl implements UserService {
 			throw new BusinessRuleException("errors.under.age", HttpStatus.BAD_REQUEST);
 	}
 
+	/**
+     * Retrieves user information by user ID.
+     *
+     * @param userId The unique identifier of the user.
+     * @return The user information if found.
+     * @throws UserNotFoundException If the user with the specified ID is not found.
+     */
 	@Override
 	public UserResponse getUserById(Long userId) {
 		
