@@ -11,7 +11,7 @@ spring:
     database: postgresql
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/technical-test-supralog
@@ -26,4 +26,4 @@ spring:
       connectionTimeout: 30000
   flyway:
     table: schema_version
-    enabled: false
+    enabled: true

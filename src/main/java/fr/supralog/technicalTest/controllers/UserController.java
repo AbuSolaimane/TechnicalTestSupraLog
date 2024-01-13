@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.supralog.technicalTest.dto.request.UserRequest;
 import fr.supralog.technicalTest.dto.response.UserResponse;
 import fr.supralog.technicalTest.services.UserService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
@@ -33,7 +34,7 @@ public class UserController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> createUser(@RequestBody UserRequest userRequest) {
+	public ResponseEntity<Void> createUser(@Valid @RequestBody UserRequest userRequest) {
 
 		this.userService.createUser(userRequest);
 

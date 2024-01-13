@@ -24,6 +24,7 @@ public class UserEntity {
 	@Enumerated(EnumType.STRING)
 	private Country country;
 	private LocalDate birthday;
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	private String address;
 	private String phone;

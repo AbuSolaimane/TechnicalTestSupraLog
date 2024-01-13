@@ -1,5 +1,6 @@
 package fr.supralog.technicalTest.dto.response;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -17,6 +18,6 @@ public record UserResponse(
 		LocalDate birthday,
 		Gender gender,
 		String address,
-		String phone) {
+		String phone) implements Serializable {
 
 }
