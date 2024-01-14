@@ -38,6 +38,7 @@ public class LoggingAspect {
         long executionTime = endTime - startTime;
 
         logger.info("Method execution time: {} ms", executionTime);
+        System.out.println("-------------------------------------------------------------");
 
         return result;
     }

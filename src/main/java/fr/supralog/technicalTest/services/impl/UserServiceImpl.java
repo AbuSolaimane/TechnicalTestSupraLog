@@ -68,14 +68,21 @@ public class UserServiceImpl implements UserService {
      */
 	private void validate(UserRequest userRequest) {
 		
+		//throw exception if password and confirmedPassword are different
 		if (!userRequest.password().equals(userRequest.confirmedPassword()))
 			throw new BusinessRuleException("errors.confirmed.password.match", HttpStatus.BAD_REQUEST);
 		
+		//throw exception if user doesn't live in france
 		if(!userRequest.country().equals(Country.FRANCE))
 			throw new BusinessRuleException("errors.not.french.resident", HttpStatus.BAD_REQUEST);
 		
+		//throw exception if user under 18
 		if(userRequest.birthday().plusYears(18).isAfter(LocalDate.now()))
 			throw new BusinessRuleException("errors.under.age", HttpStatus.BAD_REQUEST);
+		
+		//throw exception if email exists
+		if(this.userRepository.findByEmail(userRequest.email()) != null)
+			throw new BusinessRuleException("errors.email.exists", new String[] { userRequest.email() }, HttpStatus.BAD_REQUEST);
 	}
 
 	/**
@@ -94,6 +101,12 @@ public class UserServiceImpl implements UserService {
 		return UserMapper.mapToDto(userEntity);
 	}
 
+	/**
+	 * Retrieves a list of users based on the specified country.
+	 *
+	 * @param country The country for which to retrieve users.
+	 * @return A list of UserResponse objects containing user information from the specified country.
+	 */
 	@Override
 	public List<UserResponse> getUsersByCountry(Country country) {
 		
