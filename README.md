@@ -171,15 +171,6 @@ Responsibility:
 
 - **Flyway:** put all your database changes in the folder with respect to flyway specifications
 
-## Usage
-
-1. Clone the repository.
-2. Build the project using Maven: `mvn clean install`.
-3. Run the application: `mvn spring-boot:run`.
-4. Access the application at [http://localhost:8080/TECHNICALTEST](http://localhost:8080/TECHNICALTEST).
-
-Feel free to update and expand this documentation based on additional details and specificities of your project.
-
 
 ## Usage
 
