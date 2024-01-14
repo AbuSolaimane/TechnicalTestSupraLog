@@ -158,14 +158,22 @@ Attributes:
 Responsibility:
 - Centralized exception handling for providing consistent error responses.
 
-## 7. Logging
+## 7. Resolving Messages
+
+This project utilizes Spring's `MessageSource` for resolving messages. The messages used in the application are stored in the `messages.properties` file located in the resources folder.
+
+### messages.properties
+
+The `messages.properties` file contains key-value pairs for different messages used throughout the application. This enables easy customization of messages
+
+## 8. Logging
 
 ### LoggingAspect
 
 Responsibility:
 - An aspect-oriented programming (AOP) aspect to log input, output, and processing time of each method call.
 
-### 10. Database Migration
+### 9. Database Migration
 
 ### db/migration folder
 
