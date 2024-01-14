@@ -1,14 +1,19 @@
 package fr.supralog.technicalTest.controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.supralog.technicalTest.common.enums.Country;
 import fr.supralog.technicalTest.dto.request.UserRequest;
 import fr.supralog.technicalTest.dto.response.UserResponse;
 import fr.supralog.technicalTest.services.UserService;
@@ -62,4 +67,22 @@ public class UserController {
 
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
+	
+	/**
+	 * Retrieves a list of users based on the specified country.
+	 *
+	 * @param country The country for which to retrieve users. Defaults to "FRANCE" if not provided.
+	 * @return ResponseEntity containing a list of user information if found, or HttpStatus.NO_CONTENT if no users match the criteria.
+	 */
+	@GetMapping
+	public ResponseEntity<List<UserResponse>> getUsersByCountry(
+			@RequestParam(name = "country", defaultValue = "FRANCE") Country country) {
+		
+		List<UserResponse> users = userService.getUsersByCountry(country);
+		if (CollectionUtils.isEmpty(users))
+			return new ResponseEntity<List<UserResponse>>(HttpStatus.NO_CONTENT);
+
+		return new ResponseEntity<>(users, HttpStatus.OK);
+	}
+
 }

@@ -1,6 +1,8 @@
 package fr.supralog.technicalTest.services.impl;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -90,6 +92,15 @@ public class UserServiceImpl implements UserService {
 				.orElseThrow(() -> new UserNotFoundException("errors.user.not.found", new String[] { userId.toString() }));
 		
 		return UserMapper.mapToDto(userEntity);
+	}
+
+	@Override
+	public List<UserResponse> getUsersByCountry(Country country) {
+		
+		List<UserEntity> usersByCountry = userRepository.findByCountry(country);
+        return usersByCountry.stream()
+                .map(UserMapper::mapToDto)
+                .collect(Collectors.toList());
 	}
 
 }
