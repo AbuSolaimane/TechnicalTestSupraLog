@@ -149,7 +149,7 @@ Responsibility:
 - Represents outgoing user information for user retrieval.
 
 Attributes:
-- Same as UserEntity.
+- Same as UserEntity without password.
 
 ## 6. Exception Handling
 
